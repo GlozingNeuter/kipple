@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    <body>
+        {{- partial "header.html" . -}}
+        <main>
+        {{- block "main" . }}
+<section class="section">
+  <div class="container">
+    <h1 class="posts">Slides</h1>
+    <div class="content">
+      {{ .Content }}
+        <ul class="posts-list">
+        {{ range sort .Sections}}
+            <li><a class="" href="{{ .Permalink }}">{{.Title}}</a>
+            </li>
+        {{ end }}
+        </ul>
+    </div>
+  </div>
+</section>
+{{- end }}
+        </main>
+        {{- partial "footer.html" . -}}
+    </body>
+</html>
