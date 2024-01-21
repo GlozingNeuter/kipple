@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v6.js"></script>
+
+<!-- Create a div where the graph will take place -->
+<body>
+  <div style="display:flex; justify-content: center"><h3>Graphique sociotechnique avec indice de négociation</h3></div>
+    <div id="content" style="align-items: center">
+      <svg width="1000" height="700" style="display:flex">
+        <g transform="translate(50, 100)"></g>
+      </svg>
+    </div>
+  </div>
+</body>
+<script>
+
+  // set the dimensions and margins of the graph
+  var width = 1000
+  var height = 700
+  
+  // append the svg object to the body of the page
+
+
+
+  var data = [  { "name": "2010",
+                  "size": 14 ,
+                  "allié" : [] ,
+                  "in" : 1.0,
+                },
+                { "name": "2015",
+                  "size": 14 ,
+                  "allié" : ['RMDP', 'Synergie', 'Tout-en-un', 'RTC_Liège', 'Védia', 'Télésambre', 'Boukè', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre'] ,
+                  "in" : 1.14285714285714,
+                },
+                { "name": "2017",
+                  "size": 14 ,
+                  "allié" : ['RMDP', 'Synergie', 'Tout-en-un', 'RTC_Liège', 'Védia', 'Télésambre', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre', 'Step2e', 'Phase_de_test'] ,
+                  "in" : 1.21428571428571,
+                },
+                { "name": "2018",
+                  "size": 13 ,
+                  "allié" : ['RMDP', 'Synergie', 'Tout-en-un', 'RTC_Liège', 'Védia', 'Télésambre', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre', 'Phase_de_test'] ,
+                  "in" : 1.29120879120879,
+                },
+                { "name": "Fin 2018",
+                  "size": 3 ,
+                  "allié" : ['RTC_Liège'] ,
+                  "in" : 1.95787545787546,
+                },
+                { "name": "Juillet 2019",
+                  "size": 17 ,
+                  "allié" : ['RTC_Liège', 'DB_Step2e', 'MAM'] ,
+                  "in" : 2.78140486964016,
+                },
+                { "name": "Juillet 2021",
+                  "size": 18 ,
+                  "allié" : ['Synergie', 'Tout-en-un*', 'RTC_Liège', 'DB_Step2e', 'MAM', 'Développeur_web', 'Export', 'Module_planning', 'Module_conduite', 'Védia*', 'Télésambre*', 'Boukè*', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre'] ,
+                  "in" : 2.83696042519572,
+                },
+                { "name": "Août 2021",
+                  "size": 19 ,
+                  "allié" : ['Synergie', 'RTC_Liège', 'DB_Step2e', 'MAM', 'Développeur_web', 'Export', 'Module_planning', 'Module_conduite', 'Module_diffusion', 'Védia*', 'Télésambre*', 'Boukè*', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre'] ,
+                  "in" : 2.94222358309046,
+                },
+                { "name": "Fin 2021",
+                  "size": 20 ,
+                  "allié" : ['Synergie', 'Tout-en-un', 'RTC_Liège', 'DB_Step2e', 'MAM', 'Développeur_web', 'Export', 'Module_planning', 'Module_conduite', 'Module_diffusion', 'Module_traffic', 'Védia*', 'Télésambre*', 'Boukè*', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre'] ,
+                  "in" : 2.99222358309046,
+                },
+                { "name": "2022",
+                  "size": 21 ,
+                  "allié" : ['Synergie', 'Tout-en-un', 'RTC_Liège', 'DB_Step2e', 'MAM', 'Développeur_web', 'Export', 'Module_planning', 'Module_conduite', 'Module_diffusion', 'Module_traffic', 'Module_web', 'Védia*', 'Télésambre*', 'Boukè*', 'Matélé', 'Tvlux', 'Canal_Zoom', 'TV_Com', 'Antenne_Centre'] ,
+                  "in" : 3.0398426307095,
+                },
+              ]
+{{/*  
+  function handleDrag(e) {
+    e.subject.x = e.x;
+    e.subject.y = e.y;
+    update();
+  }
+    
+  let drag = d3.drag()
+    .on('drag', handleDrag);
+                */}}
+
+
+
+
+  console.log(data[0])
+  console.log(data[1].allié)
+  // Initialize the circle: all located at the center of the svg area
+  var xScale = d3.scaleLinear().domain([0, 1]).range([1, 600]);
+
+  // create a tooltip
+  const Tooltip = d3.select("body")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "2px")
+    .style("border-radius", "5px")
+    .style("padding", "5px")
+    
+
+
+ // Three function that change the tooltip when user hover / move / leave a cell
+const mouseover = function(event, d) {
+  Tooltip
+    .style("opacity", 1)
+    .html(d.allié)
+    d3.select(this)
+    .style("stroke", "white")
+    .style("opacity", 1)
+}
+const mousemove = function(event, d) {
+  Tooltip
+    .html("<u>" + d.name + "</u> : " + d.allié)
+    .style("left", (event.x/2+20) + "px")
+    .style("top", (event.y/2+30) + "px")
+    .raise()
+}
+var mouseleave = function(event, d) {
+  Tooltip
+    .style("opacity", 0)
+    d3.select(this)
+    .style("stroke", "#69a2b2")
+    .style("opacity", 0.8)
+
+}
+
+ 
+  
+    {{/*  var subnode = svg.append("g1")
+    .selectAll("circle")
+    .data(data[1].allié)
+    .enter()
+    .append("circle")
+      .attr("r", 20)  */}}
+
+      
+  // Features of the forces applied to the nodes:
+  var simulation = d3.forceSimulation(data)
+	                .force('charge', d3.forceManyBody().strength(80))
+	                .force('x', d3.forceX().x(function(d) {
+	                	return xScale(d.in/3);
+	                }))
+	                .force('y', d3.forceY().y(function(d) {
+	                	return 200;
+	                }))
+	                .force('collision', d3.forceCollide().radius(function(d) {
+	                	return d.size*2.3;
+	                }))
+	                .on('tick', ticked)
+
+;
+  // Apply these forces to the nodes and update their positions.
+  // Once the force algorithm is happy with positions ('alpha' value is low enough), simulations will stop.
+  function ticked() {
+    var u = d3.select('svg g')
+      .selectAll('circle')
+      .data(data)
+      .join('circle')
+      .attr('r', function(d) { return d.size*2; } )
+      .style('fill', function(d) {
+        return d.color;
+      })
+      .attr('cx', function(d) {
+        return d.x;
+      })
+      .attr('cy', function(d) {
+        return d.y;
+      })
+      .style("fill", "#69b3a2")
+      .style("fill-opacity", 0.3)
+      .attr("stroke", "#69a2b2")
+      .style("stroke-width", 4)
+      .call(d3.drag() // call specific function when circle is dragged
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended))
+      .on("mouseover", mouseover) // What to do when hovered
+      .on("mousemove", mousemove)
+      .on("mouseleave", mouseleave)
+ 
+
+      {{/*  .call(drag)  */}}
+      
+      ;
+  // What happens when a circle is dragged?
+  function dragstarted(event, d) {
+    if (!event.active) simulation.alphaTarget(.03).restart();
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+  function dragged(event, d) {
+    d.fx = event.x;
+    d.fy = event.y;
+  }
+  function dragended(event, d) {
+    if (!event.active) simulation.alphaTarget(.03);
+    d.fx = null;
+    d.fy = null;
+  }
+
+  }
+  </script>

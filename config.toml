@@ -1,6 +1,6 @@
-baseurl      = "localhost"
-title        = "My Blog"
-languageCode = ["en-us", "fr-fr"]
+baseurl      = "https://kipple.be"
+title        = "Kipple"
+languageCode = "en-us"
 theme        = ["hello-friend-ng", "github.com/dzello/reveal-hugo"]
 paginate     = 10
 
@@ -11,7 +11,7 @@ paginate     = 10
   dateformNumTime = "2006-01-02 15:04"
 
   # Subtitle for home
-  homeSubtitle = "Visualisation et sciences sociales"
+  homeSubtitle = "Visualisations et sciences sociales"
 
   # Set disableReadOtherPosts to true in order to hide the links to other posts.
   disableReadOtherPosts = false
@@ -25,10 +25,10 @@ paginate     = 10
   images = [""]
 [[params.social]]
   name = "gpg"
-  url = "<profile_URL>"
+  url = "https://kipple.be/pgp.txt"
 [[params.social]]
   name = "email"
-  url = "mailto:olivier.gason@gmail.com"
+  url = "mailto:olivier@kipple.be"
 [[params.social]]
   name = "github"
   url = "https://github.com/GlozingNeuter"
@@ -47,13 +47,6 @@ paginate     = 10
     keywords = ""
     copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
     readOtherPosts = "Read other posts"
-  [languages.fr]
-    title = "Kipple"
-    subtitle = "Visualisations et sciences sociales"
-    keywords = ""
-    copyright = '<a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-    readOtherPosts = "Read other posts"
-
 
     [languages.en.params.logo]
       logoText = "cd kipple/"
@@ -73,13 +66,16 @@ paginate     = 10
     name       = "Slides"
     url        = "/slides"
 ## Reveal
+[markup.goldmark.renderer]
+unsafe = true
+
 [outputFormats.Reveal]
 baseName = "index"
 mediaType = "text/html"
 isHTML = true
-[[reveal_hugo.plugins]]
-source = "plugin/reveal.js-d3/reveald3.js"
-[markup.goldmark.renderer]
-unsafe = true
 
-baseurl = "https://kipple.be"
+[[reveal_hugo.plugins]]
+name = "revealD3"
+source = "https://kipple.be/plugin/reveal.js-d3/reveald3.js"
+
+

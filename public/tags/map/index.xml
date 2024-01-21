@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Map on Kipple</title>
+    <link>https://kipple.be/tags/map/</link>
+    <description>Recent content in Map on Kipple</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Fri, 26 May 2023 22:13:50 +0100</lastBuildDate><atom:link href="https://kipple.be/tags/map/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mapping DAI magazines’ Readership</title>
+      <link>https://kipple.be/posts/mapping_the_dai/</link>
+      <pubDate>Fri, 26 May 2023 22:13:50 +0100</pubDate>
+      
+      <guid>https://kipple.be/posts/mapping_the_dai/</guid>
+      <description>While digging through magazines created by user clubs of DAI computers, we stumbled upon lists of their readers. While this information looked very interesting at first glance, we had to find a satisfying way to analyze this trove of data. While this effort is ongoing, we will discuss here the challenges involved in analyzing this data and propose to use maps to visualize the geographic diversity and scale of the DAI&amp;rsquo;s network.</description>
+    </item>
+    
+  </channel>
+</rss>
