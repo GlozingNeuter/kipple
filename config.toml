@@ -78,4 +78,6 @@ isHTML = true
 name = "revealD3"
 source = "https://kipple.be/plugin/reveal.js-d3/reveald3.js"
 
-
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
